@@ -1,0 +1,11 @@
+# Template information section
+name: "rsb_swift_service"
+summary: "Service for DI container."
+author: "Evgeny Mikhaylov"
+version: "1.0.1"
+license: "MIT"
+
+# The declarations for code files
+code_files:
+- {name: Protocol.swift, path: Code/service_protocol.swift.liquid}
+- {name: .swift, path: Code/service.swift.liquid}

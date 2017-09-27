@@ -1,0 +1,12 @@
+{% include 'header' %}
+
+final class {{ prefix }}{{ module_info.name }}ModuleBuilder {
+    
+    static func module(dependencies: {{ prefix }}{{ module_info.name }}Dependencies) -> {{ prefix }}{{ module_info.name }}ViewController {
+        let router = {{ prefix }}{{ module_info.name }}Router()
+        let viewModel = {{ prefix }}{{ module_info.name }}ViewModel(router: router)
+        let viewController = {{ prefix }}{{ module_info.name }}ViewController(viewModel: viewModel)
+        router.viewController = viewController        
+        return viewController
+    }
+}

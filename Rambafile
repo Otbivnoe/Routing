@@ -1,0 +1,24 @@
+### Headers settings
+company: Rosberry
+
+### Xcode project settings
+project_name: Routing
+xcodeproj_path: Routing.xcodeproj
+
+### Code generation settings section
+# The main project target name
+project_target: Routing
+
+# The file path for new modules
+project_file_path: Routing/
+
+# The xcodeproje group path to new modules
+project_group_path: Routing/
+
+### Templates
+catalogs:
+- 'https://github.com/rosberry/Rosberry-Generamba-Templates.git'
+
+templates:
+- {name: rsb_swift_viper_vm_di_module}
+- {name: rsb_swift_service}

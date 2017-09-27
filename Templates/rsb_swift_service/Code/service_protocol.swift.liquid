@@ -1,0 +1,9 @@
+{% include 'header' %}
+
+protocol Has{{ prefix }}{{ module_info.name }} {
+    var {{ module_info.name }}: {{ prefix }}{{ module_info.name }}Protocol { get }
+}
+
+protocol {{ prefix }}{{ module_info.name }}Protocol {
+
+}

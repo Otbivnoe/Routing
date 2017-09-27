@@ -1,0 +1,16 @@
+{% include 'header' %}
+
+final class {{ prefix }}{{ module_info.name }}ViewModel {
+
+    private let router: {{ prefix }}{{ module_info.name }}Router
+    
+	// MARK: - Lifecycle
+
+    init(router: {{ prefix }}{{ module_info.name }}Router) {
+        self.router = router
+    }
+
+    func didTriggerViewReadyEvent() {
+        
+    }
+}
