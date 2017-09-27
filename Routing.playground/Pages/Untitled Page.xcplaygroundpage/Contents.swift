@@ -2,7 +2,7 @@
 
 import UIKit
 
-class Routing: ErrorRoute, TestRoute {
+class Routing: TestRoute, ErrorRoute {
 
     let viewController: UIViewController
 
@@ -12,6 +12,9 @@ class Routing: ErrorRoute, TestRoute {
 }
 
 
+protocol Closable {
+    func close()
+}
 
 
 protocol ErrorRoute {
@@ -19,19 +22,20 @@ protocol ErrorRoute {
 }
 
 extension ErrorRoute where Self: Routing {
-    func show(error: Error) {
-        // show
-    }
+    func show(error: Error) {}
 }
 
 
-protocol TestRoute {
+protocol TestRoute: Closable {
     func show()
 }
 
 extension TestRoute where Self: Routing {
     func show() {}
+    func close() {}
 }
+
+
 
 
 
@@ -40,7 +44,15 @@ extension TestRoute where Self: Routing {
 
 final class StoresViewController: UIViewController {}
 
-class StoresRouter {
+class Router {
+    var openRoute: Closable?
+    
+    func close() {
+        openRoute?.close()
+    }
+}
+
+class StoresRouter: Router {
 
     typealias Routes = TestRoute & ErrorRoute
 
