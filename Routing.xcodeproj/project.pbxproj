@@ -37,7 +37,6 @@
 		842070901F7BB2B400C84CAC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		842070931F7BB2B400C84CAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		842070951F7BB2B400C84CAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8420709B1F7BB2DC00C84CAC /* Routing.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Routing.playground; sourceTree = "<group>"; };
 		923D318FF23256E1453DEDBC /* PurchaseViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PurchaseViewController.swift; sourceTree = "<group>"; };
 		95AEB56EC18E4BE561F783E1 /* SettingsModuleBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsModuleBuilder.swift; sourceTree = "<group>"; };
 		A3584C57ADCB7E2E7C56A987 /* SettingsViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -81,7 +80,6 @@
 		8420707D1F7BB2B400C84CAC = {
 			isa = PBXGroup;
 			children = (
-				8420709B1F7BB2DC00C84CAC /* Routing.playground */,
 				842070881F7BB2B400C84CAC /* Routing */,
 				842070871F7BB2B400C84CAC /* Products */,
 			);

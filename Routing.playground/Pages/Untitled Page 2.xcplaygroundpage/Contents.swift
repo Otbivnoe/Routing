@@ -38,7 +38,7 @@ final class Modal: Transition {
 
 
 protocol Route {}
-extension Route where Self: RouterProtocol {
+extension Route where Self: Routerable {
     func open(_ viewController: UIViewController, transition: Transition.Type, animated: Bool = true) {
         let transition = transition.init()
         transition.show(viewController, from: self.viewController!, animated: animated)
@@ -62,7 +62,7 @@ protocol PurchaseRoute: Route, Closable {
     func show()
 }
 
-extension PurchaseRoute where Self: RouterProtocol {
+extension PurchaseRoute where Self: Routerable {
     func show() {}
     func close() {}
 }
@@ -78,7 +78,7 @@ protocol SettingsRoute: Route, OpenSettingsRoute, Closable {
     associatedtype SettingsRouteType: Transition
 }
 
-extension SettingsRoute where Self: RouterProtocol {
+extension SettingsRoute where Self: Routerable {
     func openSettingsModule() {
         open(UIViewController(), transition: SettingsRouteType.self)
     }
@@ -95,12 +95,12 @@ extension SettingsRoute where Self: RouterProtocol {
 
 final class StoresViewController: UIViewController {}
 
-protocol RouterProtocol: Closable {
+protocol Routerable: Closable {
     associatedtype T: UIViewController
     weak var viewController: T? { get }
 }
 
-class Router<U>: RouterProtocol where U: UIViewController {
+class Router<U>: Routerable where U: UIViewController {
     typealias T = U
     
     weak var viewController: U?

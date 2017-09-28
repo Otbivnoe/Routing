@@ -45,7 +45,7 @@ private struct AssociatedKeys {
 
 protocol Route: class, UINavigationControllerDelegate, Closable {}
 extension Route where Self: Routerable {
-
+    
     private var animator: Animator? {
         get {
             return objc_getAssociatedObject(self, &AssociatedKeys.animatorKey) as? Animator
