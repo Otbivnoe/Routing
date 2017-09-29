@@ -16,7 +16,6 @@
 		8420708F1F7BB2B400C84CAC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8420708D1F7BB2B400C84CAC /* Main.storyboard */; };
 		842070911F7BB2B400C84CAC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 842070901F7BB2B400C84CAC /* Assets.xcassets */; };
 		842070941F7BB2B400C84CAC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 842070921F7BB2B400C84CAC /* LaunchScreen.storyboard */; };
-		84A1E1B71F7E17BA00D6F48A /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1E1B61F7E17BA00D6F48A /* Route.swift */; };
 		84A1E1B91F7E183400D6F48A /* NoInternetConnectionRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1E1B81F7E183400D6F48A /* NoInternetConnectionRoute.swift */; };
 		84A1E1BB1F7E185D00D6F48A /* SettingsRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1E1BA1F7E185D00D6F48A /* SettingsRoute.swift */; };
 		84D1B9651F7E16AF00A03C7F /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D1B9641F7E16AF00A03C7F /* Router.swift */; };
@@ -43,7 +42,6 @@
 		842070901F7BB2B400C84CAC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		842070931F7BB2B400C84CAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		842070951F7BB2B400C84CAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		84A1E1B61F7E17BA00D6F48A /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		84A1E1B81F7E183400D6F48A /* NoInternetConnectionRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetConnectionRoute.swift; sourceTree = "<group>"; };
 		84A1E1BA1F7E185D00D6F48A /* SettingsRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRoute.swift; sourceTree = "<group>"; };
 		84D1B9641F7E16AF00A03C7F /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -84,7 +82,6 @@
 			isa = PBXGroup;
 			children = (
 				84D1B9641F7E16AF00A03C7F /* Router.swift */,
-				84A1E1B61F7E17BA00D6F48A /* Route.swift */,
 				840F1AF91F7E30AE00FF3A4E /* Transition.swift */,
 				84A1E1B51F7E17AE00D6F48A /* Routes */,
 			);
@@ -233,7 +230,6 @@
 				480AAE2A0C9B4FB762DC916C /* SettingsViewController.swift in Sources */,
 				C2CC82C233307AE3FDE79111 /* SettingsViewModel.swift in Sources */,
 				CF27C648698108F7E41C1851 /* SettingsRouter.swift in Sources */,
-				84A1E1B71F7E17BA00D6F48A /* Route.swift in Sources */,
 				F815D882C2DF079E6A7F16ED /* MainModuleBuilder.swift in Sources */,
 				84D1B9651F7E16AF00A03C7F /* Router.swift in Sources */,
 				7981634FCCC7A63B9E29CE17 /* MainViewController.swift in Sources */,

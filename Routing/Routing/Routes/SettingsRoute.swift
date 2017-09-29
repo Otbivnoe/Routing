@@ -11,7 +11,7 @@ protocol OpenSettingsRoute {
     func openSettingsModule()
 }
 
-protocol SettingsRoute: Route, OpenSettingsRoute {
+protocol SettingsRoute: ClosableRoute, OpenSettingsRoute {
     var settingsTransition: Transition { get }
 }
 

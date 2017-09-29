@@ -8,6 +8,10 @@
 import Foundation
 import UIKit
 
+protocol ClosableRoute: class {
+    func closeRoute()
+}
+
 protocol Closable: class {
     func close()
 }
