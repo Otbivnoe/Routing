@@ -9,9 +9,9 @@
 import Foundation
 import UIKit
 
-final class MainRouter: Router<MainViewController>, SettingsRoute, NoInternetConnectionRoute {
+final class MainRouter: Router<MainViewController>, SettingsRoute, NoInternetConnectionRoute, AppSettingsRoute {
 
-    typealias Routes = OpenSettingsRoute & NoInternetConnectionRoute
+    typealias Routes = OpenSettingsRoute & NoInternetConnectionRoute & AppSettingsRoute
 
     var settingsTransition: Transition {
         switch selectedIndex {
