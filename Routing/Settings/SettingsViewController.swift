@@ -12,6 +12,14 @@ final class SettingsViewController: UIViewController {
     
     let viewModel: SettingsViewModel
     
+    private lazy var closeButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .red
+        button.setTitle("Close", for: .normal)
+        button.addTarget(self, action: #selector(closeButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
     // MARK: - Lifecycle
     
     init(viewModel: SettingsViewModel) {
@@ -25,6 +33,19 @@ final class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
+        view.addSubview(closeButton)
         viewModel.didTriggerViewReadyEvent()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        closeButton.frame.size = CGSize(width: 50, height: 50)
+        closeButton.center = view.center
+    }
+    
+    @objc private func closeButtonPressed(_ sender: UIButton) {
+        viewModel.closeEvent()
     }
 }

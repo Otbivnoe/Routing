@@ -8,15 +8,19 @@
 
 final class SettingsViewModel {
 
-    private let router: SettingsRouter
+    private let router: SettingsRouter.Routes
     
 	// MARK: - Lifecycle
 
-    init(router: SettingsRouter) {
+    init(router: SettingsRouter.Routes) {
         self.router = router
     }
 
     func didTriggerViewReadyEvent() {
         
+    }
+    
+    func closeEvent() {
+        router.close()
     }
 }

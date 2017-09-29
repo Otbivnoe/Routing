@@ -6,7 +6,22 @@
 //  Copyright © 2017 Rosberry. All rights reserved.
 //
 
-final class MainRouter {
+import Foundation
+import UIKit
+
+final class MainRouter: Router<MainViewController>, SettingsRoute, NoInternetConnectionRoute {
+
+    typealias Routes = OpenSettingsRoute & NoInternetConnectionRoute
     
-    weak var viewController: MainViewController?
+    var settingsTransition: Transition {
+        let index = UserDefaults.standard.value(forKey: "index") as? Int ?? 0
+        
+        switch index {
+        case 0: return .push(Transition.Parameters(animated: true))
+        case 1: return .modal(Transition.Parameters.default)
+        case 2: return .modal(Transition.Parameters(animator: FadeAnimator()))
+            
+        default: return .push(Transition.Parameters(animated: true))
+        }
+    }
 }

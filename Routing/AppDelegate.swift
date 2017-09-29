@@ -1,199 +1,47 @@
-//: [Previous](@previous)
+//
+//  AppDelegate.swift
+//  Routing
+//
+//  Created by Nikita Ermolenko on 27/09/2017.
+//
 
-import Foundation
 import UIKit
-import ObjectiveC
 
-protocol Animator: UIViewControllerAnimatedTransitioning {
-    var isPresenting: Bool { get set }
-}
-
-enum Transition {
-    case modal(Parameters)
-    case push(Parameters)
-    //    case tab
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    final class Parameters {
-        typealias CompletionHandler = () -> Void
+    var window: UIWindow?
         
-        var animator: Animator?
-        var animated: Bool = true
-        var completion: CompletionHandler?
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        let mainModule = MainModuleBuilder.module()
+        let navigationController = UINavigationController(rootViewController: mainModule)
+        window?.rootViewController = navigationController
         
-        static var `default` = Parameters()
-        
-        init(animator: Animator? = nil, animated: Bool = true, completion: CompletionHandler? = nil) {
-            self.animator = animator
-            self.animator = animator
-            self.completion = completion
-        }
-    }
-}
-
-
-
-
-
-protocol Closable: class {
-    func close()
-}
-
-
-private struct AssociatedKeys {
-    static var animatorKey = "nx_animator"
-}
-
-protocol Route: class, UINavigationControllerDelegate, Closable {}
-extension Route where Self: Routerable {
-
-    private var animator: Animator? {
-        get {
-            return objc_getAssociatedObject(self, &AssociatedKeys.animatorKey) as? Animator
-        }
-        set {
-            objc_setAssociatedObject(self, &AssociatedKeys.animatorKey, animator, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
+        return true
     }
     
-    func open(_ presentedViewController: UIViewController?, transition: Transition) {
-        guard let presentedViewController = presentedViewController else {
-            assertionFailure("Cann't present a nil view controller.")
-            return
-        }
-        switch transition {
-        case let .push(parameters):
-            if let animator = parameters.animator {
-                self.animator = animator
-                viewController?.navigationController?.delegate = self
-            }
-            viewController?.navigationController?.pushViewController(presentedViewController, animated: parameters.animated)
-        case let .modal(parameters):
-            viewController?.present(presentedViewController, animated: parameters.animated, completion: parameters.completion)
-        }
+    func applicationWillResignActive(_ application: UIApplication) {
+        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
     }
     
-    func close(_ closedViewController: UIViewController?, transition: Transition) {
-        guard let closedViewController = closedViewController else {
-            assertionFailure("Cann't close a nil view controller.")
-            return
-        }
-        switch transition {
-        case let .push(parameters):
-            if let animator = parameters.animator {
-                self.animator = animator
-                viewController?.navigationController?.delegate = self
-            }
-            viewController?.navigationController?.popViewController(animated: parameters.animated)
-        case let .modal(parameters):
-            closedViewController.dismiss(animated: parameters.animated, completion: parameters.completion)
-        }
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
+        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
     
-    func navigationController(_ navigationController: UINavigationController,
-                              animationControllerFor operation: UINavigationControllerOperation,
-                              from fromVC: UIViewController,
-                              to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        if operation == .push {
-            animator?.isPresenting = true
-            return nil
-        }
-        else {
-            animator?.isPresenting = false
-            return nil
-        }
-    }
-}
-
-
-
-
-protocol OpenNoInternetConnectionRoute {
-    func openNoInternetConnectionAlert()
-}
-
-protocol NoInternetConnectionRoute: OpenNoInternetConnectionRoute {}
-
-extension NoInternetConnectionRoute where Self: Routerable {
-    func openNoInternetConnectionAlert() {
-        let alertViewController = UIAlertController(title: "Title", message: "No internet connection", preferredStyle: .alert)
-        viewController?.present(alertViewController, animated: true, completion: nil)
-    }
-}
-
-
-
-
-
-
-protocol OpenSettingsRoute {
-    func openSettingsModule()
-}
-
-protocol SettingsRoute: Route, OpenSettingsRoute {
-    var settingsTransition: Transition { get }
-}
-
-extension SettingsRoute where Self: Routerable {
-    func openSettingsModule() {
-        let settingsRouter = SettingsRouter2()
-        settingsRouter.closableRoute = self
-        open(viewController, transition: settingsTransition)
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     }
     
-    func close() {
-        close(viewController, transition: settingsTransition)
-    }
-}
-
-
-
-
-class ProfileViewController: UIViewController {}
-class SettingsViewController2: UIViewController {}
-
-
-
-
-protocol Routerable: Closable {
-    associatedtype V: UIViewController
-    weak var viewController: V? { get }
-}
-
-class Router<U>: NSObject, Routerable where U: UIViewController {
-    typealias V = U
-    
-    weak var viewController: U?
-    weak var closableRoute: Closable?
-    
-    func close() {
-        closableRoute?.close()
-    }
-}
-
-
-
-
-
-typealias ProfileRoutes = OpenSettingsRoute & OpenNoInternetConnectionRoute
-
-class ProfileRouter: Router<ProfileViewController>, SettingsRoute, NoInternetConnectionRoute {
-    
-    var settingsTransition: Transition {
-        return .push(Transition.Parameters(animated: false))
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
     
-    var friendsListTransition: Transition {
-        return .modal(Transition.Parameters.default)
+    func applicationWillTerminate(_ application: UIApplication) {
+        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    
 }
-
-
-
-
-
-
-class SettingsRouter2: Router<SettingsViewController2> {}
-
-
-
 

@@ -8,11 +8,11 @@
 
 final class SettingsModuleBuilder {
     
-    static func module() -> SettingsViewController {
+    static func module() -> (SettingsViewController, SettingsRouter) {
         let router = SettingsRouter()
         let viewModel = SettingsViewModel(router: router)
         let viewController = SettingsViewController(viewModel: viewModel)
         router.viewController = viewController        
-        return viewController
+        return (viewController, router)
     }
 }

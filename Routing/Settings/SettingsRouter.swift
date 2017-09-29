@@ -6,7 +6,7 @@
 //  Copyright © 2017 Rosberry. All rights reserved.
 //
 
-final class SettingsRouter {
-    
-    weak var viewController: SettingsViewController?
+final class SettingsRouter: Router<SettingsViewController> {
+
+    typealias Routes = Closable
 }
