@@ -12,16 +12,19 @@ import UIKit
 final class MainRouter: Router<MainViewController>, SettingsRoute, NoInternetConnectionRoute {
 
     typealias Routes = OpenSettingsRoute & NoInternetConnectionRoute
-    
+
     var settingsTransition: Transition {
-        let index = UserDefaults.standard.value(forKey: "index") as? Int ?? 0
-        
-        switch index {
+        switch selectedIndex {
         case 0: return .push(Transition.Parameters(animated: true))
         case 1: return .modal(Transition.Parameters.default)
         case 2: return .modal(Transition.Parameters(animator: FadeAnimator()))
             
-        default: return .push(Transition.Parameters(animated: true))
+        default: return .push(Transition.Parameters.default)
         }
     }
+        
+    private var selectedIndex: Int {
+        return UserDefaults.standard.value(forKey: "index") as? Int ?? 0
+    }
+    
 }
