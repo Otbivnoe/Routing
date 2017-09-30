@@ -13,7 +13,7 @@ final class MainViewController: UIViewController {
     let viewModel: MainViewModel
     
     private lazy var segmentedControl: UISegmentedControl = {
-        let segmentedControl = UISegmentedControl(items: ["push", "modal", "modal(custom)"])
+        let segmentedControl = UISegmentedControl(items: ["push", "modal", "modal(custom)", "push(custom)"])
         segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
         segmentedControl.backgroundColor = .green
         return segmentedControl

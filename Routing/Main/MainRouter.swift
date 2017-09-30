@@ -18,6 +18,7 @@ final class MainRouter: Router<MainViewController>, SettingsRoute, NoInternetCon
         case 0: return .push(Transition.Parameters(animated: true))
         case 1: return .modal(Transition.Parameters.default)
         case 2: return .modal(Transition.Parameters(animator: FadeAnimator()))
+        case 3: return .push(Transition.Parameters(animator: FadeAnimator()))
             
         default: return .push(Transition.Parameters.default)
         }

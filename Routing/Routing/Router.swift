@@ -41,6 +41,8 @@ class Router<U>: NSObject, Closable, Routerable, UINavigationControllerDelegate,
             assertionFailure("Can't present a nil view controller.")
             return
         }
+        animator = nil
+
         switch transition {
         case let .push(parameters):
             if let animator = parameters.animator {
@@ -64,13 +66,11 @@ class Router<U>: NSObject, Closable, Routerable, UINavigationControllerDelegate,
         }
         switch transition {
         case let .push(parameters):
-            if let animator = parameters.animator {
-                self.animator = animator
-                viewController?.navigationController?.delegate = self
-            }
             viewController?.navigationController?.popViewController(animated: parameters.animated)
         case let .modal(parameters):
-            closedViewController.dismiss(animated: parameters.animated, completion: nil)
+            closedViewController.dismiss(animated: parameters.animated) { [unowned self] in
+                self.animator = nil
+            }
         }
     }
     
@@ -82,11 +82,11 @@ class Router<U>: NSObject, Closable, Routerable, UINavigationControllerDelegate,
                               to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         if operation == .push {
             animator?.isPresenting = true
-            return nil
+            return animator
         }
         else {
             animator?.isPresenting = false
-            return nil
+            return animator
         }
     }
     
