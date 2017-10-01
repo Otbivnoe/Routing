@@ -7,22 +7,15 @@
 
 import Foundation
 
-protocol OpenSettingsRoute {
-    func openSettingsModule()
-}
-
-protocol SettingsRoute: ClosableRoute, OpenSettingsRoute {
+protocol SettingsRoute {
     var settingsTransition: Transition { get }
+    func openSettingsModule()
 }
 
 extension SettingsRoute where Self: Routerable {
     func openSettingsModule() {
         let (controller, router) = SettingsModuleBuilder.module()
-        router.closableRoute = self
+        router.closableTransition = settingsTransition
         open(controller, transition: settingsTransition)
-    }
-    
-    func closeRoute() {
-        close(viewController, transition: settingsTransition)
     }
 }

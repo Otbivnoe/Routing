@@ -8,10 +8,6 @@
 import Foundation
 import UIKit
 
-protocol ClosableRoute: class {
-    func closeRoute()
-}
-
 protocol Closable: class {
     func close()
 }
@@ -28,12 +24,14 @@ class Router<U>: NSObject, Closable, Routerable, UINavigationControllerDelegate,
     typealias V = U
     
     weak var viewController: U?
-    weak var closableRoute: ClosableRoute?
+    var closableTransition: Transition?
     
     private var animator: Animator?
     
     func close() {
-        closableRoute?.closeRoute()
+        if let closableTransition = closableTransition {
+            close(viewController, transition: closableTransition)
+        }
     }
     
     func open(_ presentedViewController: UIViewController?, transition: Transition) {

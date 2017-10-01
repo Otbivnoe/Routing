@@ -11,7 +11,7 @@ import UIKit
 
 final class MainRouter: Router<MainViewController>, SettingsRoute, NoInternetConnectionRoute, AppSettingsRoute {
 
-    typealias Routes = OpenSettingsRoute & NoInternetConnectionRoute & AppSettingsRoute
+    typealias Routes = SettingsRoute & NoInternetConnectionRoute & AppSettingsRoute
 
     var settingsTransition: Transition {
         switch selectedIndex {
@@ -27,5 +27,4 @@ final class MainRouter: Router<MainViewController>, SettingsRoute, NoInternetCon
     private var selectedIndex: Int {
         return UserDefaults.standard.value(forKey: "index") as? Int ?? 0
     }
-    
 }
