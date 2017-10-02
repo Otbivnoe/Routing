@@ -15,7 +15,7 @@ protocol SettingsRoute {
 extension SettingsRoute where Self: Routerable {
     func openSettingsModule() {
         let (controller, router) = SettingsModuleBuilder.module()
-        router.closableTransition = settingsTransition
+        router.openTransition = settingsTransition
         open(controller, transition: settingsTransition)
     }
 }
