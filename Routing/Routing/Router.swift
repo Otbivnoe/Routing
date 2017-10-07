@@ -12,7 +12,7 @@ protocol Closable: class {
     func close()
 }
 
-protocol Routerable: class {
+protocol RouterProtocol: class {
     associatedtype V: UIViewController
     weak var viewController: V? { get }
     
@@ -20,7 +20,7 @@ protocol Routerable: class {
     func close(_ closedViewController: UIViewController?, transition: Transition)
 }
 
-class Router<U>: NSObject, Closable, Routerable, UINavigationControllerDelegate, UIViewControllerTransitioningDelegate where U: UIViewController {
+class Router<U>: NSObject, Closable, RouterProtocol, UINavigationControllerDelegate, UIViewControllerTransitioningDelegate where U: UIViewController {
     typealias V = U
     
     weak var viewController: U?

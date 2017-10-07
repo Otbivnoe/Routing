@@ -12,7 +12,7 @@ protocol SettingsRoute {
     func openSettingsModule()
 }
 
-extension SettingsRoute where Self: Routerable {
+extension SettingsRoute where Self: RouterProtocol {
     func openSettingsModule() {
         let (controller, router) = SettingsModuleBuilder.module()
         router.closableTransition = settingsTransition
