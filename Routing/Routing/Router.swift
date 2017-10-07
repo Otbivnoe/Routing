@@ -24,12 +24,12 @@ class Router<U>: NSObject, Closable, RouterProtocol, UINavigationControllerDeleg
     typealias V = U
     
     weak var viewController: U?
-    var closableTransition: Transition?
+    var openTransition: Transition?
     
     private var animator: Animator?
     
     func close() {
-        if let closableTransition = closableTransition {
+        if let closableTransition = openTransition {
             close(viewController, transition: closableTransition)
         }
     }
