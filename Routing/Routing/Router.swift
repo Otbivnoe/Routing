@@ -27,7 +27,16 @@ class Router<U>: NSObject, Closable, RouterProtocol, UINavigationControllerDeleg
     var openTransition: Transition?
     
     private var animator: Animator?
-    
+
+    private var navigationController: UINavigationController? {
+        if let navigationController = viewController as? UINavigationController {
+            return navigationController
+        }
+        else {
+            return viewController?.navigationController
+        }
+    }
+
     func close() {
         if let closableTransition = openTransition {
             close(viewController, transition: closableTransition)
@@ -45,9 +54,9 @@ class Router<U>: NSObject, Closable, RouterProtocol, UINavigationControllerDeleg
         case let .push(parameters):
             if let animator = parameters.animator {
                 self.animator = animator
-                viewController?.navigationController?.delegate = self
+                navigationController?.delegate = self
             }
-            viewController?.navigationController?.pushViewController(presentedViewController, animated: parameters.animated)
+            navigationController?.pushViewController(presentedViewController, animated: parameters.animated)
         case let .modal(parameters):
             if let animator = parameters.animator {
                 self.animator = animator
@@ -64,7 +73,7 @@ class Router<U>: NSObject, Closable, RouterProtocol, UINavigationControllerDeleg
         }
         switch transition {
         case let .push(parameters):
-            viewController?.navigationController?.popViewController(animated: parameters.animated)
+            navigationController?.popViewController(animated: parameters.animated)
         case let .modal(parameters):
             closedViewController.dismiss(animated: parameters.animated) { [unowned self] in
                 self.animator = nil
