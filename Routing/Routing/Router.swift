@@ -5,7 +5,6 @@
 //  Created by Nikita Ermolenko on 29/09/2017.
 //
 
-import Foundation
 import UIKit
 
 protocol Closable: class {
@@ -13,6 +12,7 @@ protocol Closable: class {
 }
 
 protocol RouterProtocol: class {
+
     associatedtype V: UIViewController
     weak var viewController: V? { get }
     
@@ -20,7 +20,8 @@ protocol RouterProtocol: class {
     func close(_ closedViewController: UIViewController?, transition: Transition)
 }
 
-class Router<U>: NSObject, Closable, RouterProtocol, UINavigationControllerDelegate, UIViewControllerTransitioningDelegate where U: UIViewController {
+class Router<U>: NSObject, UINavigationControllerDelegate, UIViewControllerTransitioningDelegate where U: UIViewController {
+
     typealias V = U
     
     weak var viewController: U?
@@ -37,50 +38,6 @@ class Router<U>: NSObject, Closable, RouterProtocol, UINavigationControllerDeleg
         }
     }
 
-    func close() {
-        if let closableTransition = openTransition {
-            close(viewController, transition: closableTransition)
-        }
-    }
-    
-    func open(_ presentedViewController: UIViewController?, transition: Transition) {
-        guard let presentedViewController = presentedViewController else {
-            assertionFailure("Can't present a nil view controller.")
-            return
-        }
-        animator = nil
-
-        switch transition {
-        case let .push(parameters):
-            if let animator = parameters.animator {
-                self.animator = animator
-                navigationController?.delegate = self
-            }
-            navigationController?.pushViewController(presentedViewController, animated: parameters.animated)
-        case let .modal(parameters):
-            if let animator = parameters.animator {
-                self.animator = animator
-                presentedViewController.transitioningDelegate = self
-            }
-            viewController?.present(presentedViewController, animated: parameters.animated, completion: nil)
-        }
-    }
-    
-    func close(_ closedViewController: UIViewController?, transition: Transition) {
-        guard let closedViewController = closedViewController else {
-            assertionFailure("Can't close a nil view controller.")
-            return
-        }
-        switch transition {
-        case let .push(parameters):
-            navigationController?.popViewController(animated: parameters.animated)
-        case let .modal(parameters):
-            closedViewController.dismiss(animated: parameters.animated) { [unowned self] in
-                self.animator = nil
-            }
-        }
-    }
-    
     // MARK: - UINavigationControllerDelegate
     
     func navigationController(_ navigationController: UINavigationController,
@@ -113,5 +70,59 @@ class Router<U>: NSObject, Closable, RouterProtocol, UINavigationControllerDeleg
         }
         animator.isPresenting = false
         return animator
+    }
+}
+
+// MARK: - Closable
+
+extension Router: Closable {
+
+    func close() {
+        if let closableTransition = openTransition {
+            close(viewController, transition: closableTransition)
+        }
+    }
+}
+
+// MARK: - RouterProtocol
+
+extension Router: RouterProtocol {
+
+    func open(_ presentedViewController: UIViewController?, transition: Transition) {
+        guard let presentedViewController = presentedViewController else {
+            assertionFailure("Can't present a nil view controller.")
+            return
+        }
+        animator = nil
+
+        switch transition {
+        case let .push(parameters):
+            if let animator = parameters.animator {
+                self.animator = animator
+                navigationController?.delegate = self
+            }
+            navigationController?.pushViewController(presentedViewController, animated: parameters.animated)
+        case let .modal(parameters):
+            if let animator = parameters.animator {
+                self.animator = animator
+                presentedViewController.transitioningDelegate = self
+            }
+            viewController?.present(presentedViewController, animated: parameters.animated, completion: nil)
+        }
+    }
+
+    func close(_ closedViewController: UIViewController?, transition: Transition) {
+        guard let closedViewController = closedViewController else {
+            assertionFailure("Can't close a nil view controller.")
+            return
+        }
+        switch transition {
+        case let .push(parameters):
+            navigationController?.popViewController(animated: parameters.animated)
+        case let .modal(parameters):
+            closedViewController.dismiss(animated: parameters.animated) { [unowned self] in
+                self.animator = nil
+            }
+        }
     }
 }
