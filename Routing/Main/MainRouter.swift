@@ -15,12 +15,11 @@ final class MainRouter: Router<MainViewController>, SettingsRoute, NoInternetCon
 
     var settingsTransition: Transition {
         switch selectedIndex {
-        case 0: return .push(Transition.Parameters(animated: true))
-        case 1: return .modal(Transition.Parameters.default)
-        case 2: return .modal(Transition.Parameters(animator: FadeAnimator()))
-        case 3: return .push(Transition.Parameters(animator: FadeAnimator()))
-            
-        default: return .push(Transition.Parameters.default)
+        case 0: return PushTransition()
+        case 1: return ModalTransition()
+        case 2: return ModalTransition(animator: FadeAnimator())
+        case 3: return PushTransition(animator: FadeAnimator())
+        default: return PushTransition()
         }
     }
         

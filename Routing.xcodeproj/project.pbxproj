@@ -11,11 +11,14 @@
 		480AAE2A0C9B4FB762DC916C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3584C57ADCB7E2E7C56A987 /* SettingsViewController.swift */; };
 		7981634FCCC7A63B9E29CE17 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C421D5F891ABB347B417A484 /* MainViewController.swift */; };
 		840F1AF81F7E25B900FF3A4E /* FadeAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F1AF71F7E25B900FF3A4E /* FadeAnimator.swift */; };
-		840F1AFA1F7E30AE00FF3A4E /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F1AF91F7E30AE00FF3A4E /* Transition.swift */; };
 		8420708A1F7BB2B400C84CAC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842070891F7BB2B400C84CAC /* AppDelegate.swift */; };
 		842070911F7BB2B400C84CAC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 842070901F7BB2B400C84CAC /* Assets.xcassets */; };
 		842070941F7BB2B400C84CAC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 842070921F7BB2B400C84CAC /* LaunchScreen.storyboard */; };
 		847611281F7E3D230018FA76 /* AppSettingsRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847611271F7E3D230018FA76 /* AppSettingsRoute.swift */; };
+		848E860D1FA4C10100B35054 /* PushTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848E860C1FA4C10100B35054 /* PushTransition.swift */; };
+		848E860F1FA4C1A100B35054 /* ModalTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848E860E1FA4C1A100B35054 /* ModalTransition.swift */; };
+		848E86121FA4C25800B35054 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848E86101FA4C22800B35054 /* Animator.swift */; };
+		848E86141FA4C27100B35054 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F1AF91F7E30AE00FF3A4E /* Transition.swift */; };
 		84A1E1B91F7E183400D6F48A /* NoInternetConnectionRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1E1B81F7E183400D6F48A /* NoInternetConnectionRoute.swift */; };
 		84A1E1BB1F7E185D00D6F48A /* SettingsRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1E1BA1F7E185D00D6F48A /* SettingsRoute.swift */; };
 		84D1B9651F7E16AF00A03C7F /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D1B9641F7E16AF00A03C7F /* Router.swift */; };
@@ -42,6 +45,9 @@
 		842070931F7BB2B400C84CAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		842070951F7BB2B400C84CAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		847611271F7E3D230018FA76 /* AppSettingsRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsRoute.swift; sourceTree = "<group>"; };
+		848E860C1FA4C10100B35054 /* PushTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushTransition.swift; sourceTree = "<group>"; };
+		848E860E1FA4C1A100B35054 /* ModalTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalTransition.swift; sourceTree = "<group>"; };
+		848E86101FA4C22800B35054 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		84A1E1B81F7E183400D6F48A /* NoInternetConnectionRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetConnectionRoute.swift; sourceTree = "<group>"; };
 		84A1E1BA1F7E185D00D6F48A /* SettingsRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRoute.swift; sourceTree = "<group>"; };
 		84D1B9641F7E16AF00A03C7F /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -82,7 +88,8 @@
 			isa = PBXGroup;
 			children = (
 				84D1B9641F7E16AF00A03C7F /* Router.swift */,
-				840F1AF91F7E30AE00FF3A4E /* Transition.swift */,
+				848E86101FA4C22800B35054 /* Animator.swift */,
+				848E860A1FA4C0BA00B35054 /* Transitions */,
 				84A1E1B51F7E17AE00D6F48A /* Routes */,
 			);
 			path = Routing;
@@ -118,6 +125,16 @@
 				1A9FEC24C1B333D8B009218D /* Purchase */,
 			);
 			path = Routing;
+			sourceTree = "<group>";
+		};
+		848E860A1FA4C0BA00B35054 /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				840F1AF91F7E30AE00FF3A4E /* Transition.swift */,
+				848E860C1FA4C10100B35054 /* PushTransition.swift */,
+				848E860E1FA4C1A100B35054 /* ModalTransition.swift */,
+			);
+			path = Transitions;
 			sourceTree = "<group>";
 		};
 		84A1E1B51F7E17AE00D6F48A /* Routes */ = {
@@ -232,14 +249,17 @@
 				CF27C648698108F7E41C1851 /* SettingsRouter.swift in Sources */,
 				F815D882C2DF079E6A7F16ED /* MainModuleBuilder.swift in Sources */,
 				84D1B9651F7E16AF00A03C7F /* Router.swift in Sources */,
+				848E860D1FA4C10100B35054 /* PushTransition.swift in Sources */,
 				7981634FCCC7A63B9E29CE17 /* MainViewController.swift in Sources */,
+				848E860F1FA4C1A100B35054 /* ModalTransition.swift in Sources */,
 				9E09C5DEB69CC12624D12409 /* MainViewModel.swift in Sources */,
 				B4B1F209862D2AF71AC97768 /* MainRouter.swift in Sources */,
 				8C387D7743C312601AE39626 /* PurchaseModuleBuilder.swift in Sources */,
-				840F1AFA1F7E30AE00FF3A4E /* Transition.swift in Sources */,
+				848E86141FA4C27100B35054 /* Transition.swift in Sources */,
 				29F11D59BB9C7961D831F149 /* PurchaseViewController.swift in Sources */,
 				84A1E1B91F7E183400D6F48A /* NoInternetConnectionRoute.swift in Sources */,
 				C3AA09852A6C3586DA856186 /* PurchaseViewModel.swift in Sources */,
+				848E86121FA4C25800B35054 /* Animator.swift in Sources */,
 				AFEE158027326FB5862264B3 /* PurchaseRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
