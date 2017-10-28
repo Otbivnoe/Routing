@@ -8,8 +8,10 @@
 
 final class SettingsViewModel {
 
+    weak var output: SettingsModuleOutput?
+
     private let router: SettingsRouter.Routes
-    
+
 	// MARK: - Lifecycle
 
     init(router: SettingsRouter.Routes) {
@@ -23,4 +25,9 @@ final class SettingsViewModel {
     func closeEvent() {
         router.close()
     }
+}
+
+// MARK: - SettingsModuleInput
+
+extension SettingsViewModel: SettingsModuleInput {
 }
