@@ -11,6 +11,7 @@ class ModalTransition: NSObject, Transition {
 
     var animator: Animator?
     var isAnimated: Bool = true
+    var completionHandler: (() -> Void)?
 
     weak var viewController: UIViewController?
 
@@ -21,11 +22,11 @@ class ModalTransition: NSObject, Transition {
 
     func open(_ viewController: UIViewController) {
         viewController.transitioningDelegate = self
-        self.viewController?.present(viewController, animated: isAnimated, completion: nil)
+        self.viewController?.present(viewController, animated: isAnimated, completion: completionHandler)
     }
 
     func close(_ viewController: UIViewController) {
-        viewController.dismiss(animated: isAnimated, completion: nil)
+        viewController.dismiss(animated: isAnimated, completion: completionHandler)
     }
 }
 

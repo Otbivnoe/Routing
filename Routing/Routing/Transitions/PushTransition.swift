@@ -11,6 +11,7 @@ class PushTransition: NSObject, Transition {
 
     var animator: Animator?
     var isAnimated: Bool = true
+    var completionHandler: (() -> Void)?
 
     weak var viewController: UIViewController?
 
@@ -32,6 +33,11 @@ class PushTransition: NSObject, Transition {
 // MARK: - UINavigationControllerDelegate
 
 extension PushTransition: UINavigationControllerDelegate {
+
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        completionHandler?()
+    }
+
     func navigationController(_ navigationController: UINavigationController,
                               animationControllerFor operation: UINavigationControllerOperation,
                               from fromVC: UIViewController,
