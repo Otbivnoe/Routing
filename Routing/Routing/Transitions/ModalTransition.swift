@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ModalTransition: NSObject, Transition {
+class ModalTransition: NSObject {
 
     var animator: Animator?
     var isAnimated: Bool = true
@@ -28,6 +28,11 @@ class ModalTransition: NSObject, Transition {
         self.modalTransitionStyle = modalTransitionStyle
         self.modalPresentationStyle = modalPresentationStyle
     }
+}
+
+// MARK: - Transition
+
+extension ModalTransition: Transition {
 
     func open(_ viewController: UIViewController) {
         viewController.transitioningDelegate = self

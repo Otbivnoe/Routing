@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PushTransition: NSObject, Transition {
+class PushTransition: NSObject {
 
     var animator: Animator?
     var isAnimated: Bool = true
@@ -19,6 +19,11 @@ class PushTransition: NSObject, Transition {
         self.animator = animator
         self.isAnimated = isAnimated
     }
+}
+
+// MARK: - Transition
+
+extension PushTransition: Transition {
 
     func open(_ viewController: UIViewController) {
         self.viewController?.navigationController?.delegate = self
