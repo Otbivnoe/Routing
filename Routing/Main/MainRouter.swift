@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-final class MainRouter: Router<MainViewController>, SettingsRoute, NoInternetConnectionRoute, AppSettingsRoute {
+final class MainRouter: Router<MainViewController>, MainRouter.Routes {
 
     typealias Routes = SettingsRoute & NoInternetConnectionRoute & AppSettingsRoute
 

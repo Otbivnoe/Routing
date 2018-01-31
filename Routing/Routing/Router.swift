@@ -7,24 +7,18 @@
 
 import UIKit
 
-protocol Closable: class {
-    func close()
-}
-
 protocol RouterProtocol: class {
-
     associatedtype V: UIViewController
     weak var viewController: V? { get }
     
-    func open(_ presentedViewController: UIViewController?, transition: Transition)
-    func close(_ closedViewController: UIViewController?, transition: Transition)
+    func open(_ viewController: UIViewController, transition: Transition)
+    func close(_ viewController: UIViewController, transition: Transition)
 }
 
-class Router<U>: NSObject where U: UIViewController {
-
+class Router<U> where U: UIViewController {
     typealias V = U
     
-    weak var viewController: U?
+    weak var viewController: V?
     var openTransition: Transition?
 }
 
@@ -32,31 +26,31 @@ class Router<U>: NSObject where U: UIViewController {
 
 extension Router: RouterProtocol {
 
-    func open(_ viewController: UIViewController?, transition: Transition) {
-        guard let viewController = viewController else {
-            assertionFailure("Can't present a nil view controller.")
-            return
-        }
+    func open(_ viewController: UIViewController, transition: Transition) {
         transition.viewController = self.viewController
         transition.open(viewController)
     }
 
-    func close(_ viewController: UIViewController?, transition: Transition) {
-        guard let viewController = viewController else {
-            assertionFailure("Can't close a nil view controller.")
-            return
-        }
+    func close(_ viewController: UIViewController, transition: Transition) {
         transition.close(viewController)
     }
 }
 
 // MARK: - Closable
 
+protocol Closable: class {
+    func close()
+}
+
 extension Router: Closable {
 
     func close() {
         guard let openTransition = openTransition else {
             assertionFailure("You should specify an open transition in order to close a module.")
+            return
+        }
+        guard let viewController = viewController else {
+            assertionFailure("Nothing to close.")
             return
         }
         close(viewController, transition: openTransition)
