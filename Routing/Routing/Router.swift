@@ -7,42 +7,27 @@
 
 import UIKit
 
-protocol RouterProtocol: class {
+protocol Closable: class {
+    func close()
+}
+
+protocol RouterProtocol: Closable {
     associatedtype V: UIViewController
     weak var viewController: V? { get }
     
     func open(_ viewController: UIViewController, transition: Transition)
-    func close(_ viewController: UIViewController, transition: Transition)
 }
 
-class Router<U> where U: UIViewController {
+class Router<U>: RouterProtocol where U: UIViewController {
     typealias V = U
     
     weak var viewController: V?
     var openTransition: Transition?
-}
-
-// MARK: - RouterProtocol
-
-extension Router: RouterProtocol {
 
     func open(_ viewController: UIViewController, transition: Transition) {
         transition.viewController = self.viewController
         transition.open(viewController)
     }
-
-    func close(_ viewController: UIViewController, transition: Transition) {
-        transition.close(viewController)
-    }
-}
-
-// MARK: - Closable
-
-protocol Closable: class {
-    func close()
-}
-
-extension Router: Closable {
 
     func close() {
         guard let openTransition = openTransition else {
@@ -53,6 +38,6 @@ extension Router: Closable {
             assertionFailure("Nothing to close.")
             return
         }
-        close(viewController, transition: openTransition)
+        openTransition.close(viewController)
     }
 }
