@@ -11,14 +11,14 @@ protocol Closable: class {
     func close()
 }
 
-protocol RouterProtocol: Closable {
+protocol RouterProtocol: class {
     associatedtype V: UIViewController
     weak var viewController: V? { get }
     
     func open(_ viewController: UIViewController, transition: Transition)
 }
 
-class Router<U>: RouterProtocol where U: UIViewController {
+class Router<U>: RouterProtocol, Closable where U: UIViewController {
     typealias V = U
     
     weak var viewController: V?
